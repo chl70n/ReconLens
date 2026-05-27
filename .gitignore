@@ -1,8 +1,7 @@
 # Secrets — never commit
 .env
 
-# Local project memory (Claude Code internal — not part of source)
-CLAUDE.md
+
 
 # Python
 __pycache__/
