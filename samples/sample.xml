@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nmaprun>
+<nmaprun scanner="nmap" args="nmap -sV -p- 10.0.0.1 10.0.0.2 10.0.0.3" start="1716800000" startstr="Sat May 27 2024" version="7.94" xmloutputversion="1.09">
+
+  <!-- Host 1: web + db stack -->
+  <host starttime="1716800001" endtime="1716800030">
+    <address addr="10.0.0.1" addrtype="ipv4"/>
+    <ports>
+      <port protocol="tcp" portid="22">
+        <state state="open" reason="syn-ack"/>
+        <service name="ssh" product="OpenSSH" version="7.6p1" extrainfo="Ubuntu 4ubuntu0.7"/>
+      </port>
+      <port protocol="tcp" portid="80">
+        <state state="open" reason="syn-ack"/>
+        <service name="http" product="Apache httpd" version="2.4.29"/>
+      </port>
+      <port protocol="tcp" portid="443">
+        <state state="open" reason="syn-ack"/>
+        <service name="https" product="Apache httpd" version="2.4.29"/>
+      </port>
+      <port protocol="tcp" portid="3306">
+        <state state="open" reason="syn-ack"/>
+        <service name="mysql" product="MySQL" version="5.7.38"/>
+      </port>
+      <port protocol="tcp" portid="8080">
+        <state state="closed" reason="conn-refused"/>
+        <service name="http-proxy" product="" version=""/>
+      </port>
+    </ports>
+  </host>
+
+  <!-- Host 2: legacy/dangerous services -->
+  <host starttime="1716800031" endtime="1716800060">
+    <address addr="10.0.0.2" addrtype="ipv4"/>
+    <ports>
+      <port protocol="tcp" portid="21">
+        <state state="open" reason="syn-ack"/>
+        <service name="ftp" product="vsftpd" version="2.3.4"/>
+      </port>
+      <port protocol="tcp" portid="23">
+        <state state="open" reason="syn-ack"/>
+        <service name="telnet" product="" version=""/>
+      </port>
+      <port protocol="tcp" portid="445">
+        <state state="open" reason="syn-ack"/>
+        <service name="microsoft-ds" product="Windows 7 microsoft-ds" version=""/>
+      </port>
+    </ports>
+  </host>
+
+  <!-- Host 3: data services exposed -->
+  <host starttime="1716800061" endtime="1716800090">
+    <address addr="10.0.0.3" addrtype="ipv4"/>
+    <ports>
+      <port protocol="tcp" portid="22">
+        <state state="open" reason="syn-ack"/>
+        <service name="ssh" product="OpenSSH" version="8.9p1" extrainfo="Ubuntu 3ubuntu0.6"/>
+      </port>
+      <port protocol="tcp" portid="9200">
+        <state state="open" reason="syn-ack"/>
+        <service name="http" product="Elastic" version="7.17.0"/>
+      </port>
+      <port protocol="tcp" portid="6379">
+        <state state="open" reason="syn-ack"/>
+        <service name="redis" product="Redis" version="6.2.6"/>
+      </port>
+    </ports>
+  </host>
+
+</nmaprun>
