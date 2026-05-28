@@ -108,6 +108,57 @@ Querying llama3.2 via Ollama...
 
 ---
 
+## How it works
+
+```mermaid
+flowchart TD
+    User(["fa:fa-user User"]):::person
+
+    subgraph modes["Input modes"]
+        A["-t TARGET\nauto-scan"]:::input
+        B["-f scan.xml\nexisting file"]:::input
+    end
+
+    subgraph core["ReconLens"]
+        scanner["scanner.py\nvalidates target\nruns nmap"]:::module
+        xml[("Nmap XML")]:::data
+        parser["parser.py\ndefusedxml parse\nfilters open ports only"]:::module
+        json_payload[("lean JSON\n{hosts, open_ports}")]:::data
+        client["client.py\nHTTP POST\n/api/generate"]:::module
+    end
+
+    subgraph local["Local inference — no network egress"]
+        ollama(["Ollama\nlocalhost:11434"]):::external
+        model["llama3.2"]:::external
+    end
+
+    subgraph output["Output"]
+        terminal["rich markdown\nin terminal"]:::out
+        report[("report.md\noptional -o flag")]:::out
+    end
+
+    User --> A & B
+    A --> scanner
+    scanner -->|"nmap -sV --open -oX"| xml
+    xml --> parser
+    B --> parser
+    parser --> json_payload
+    json_payload --> client
+    client --> ollama
+    ollama --> model
+    model -->|"analysis"| client
+    client --> terminal & report
+
+    classDef person fill:#4a90d9,stroke:#2c6fad,color:#fff,rx:50
+    classDef input fill:#e8f4fd,stroke:#4a90d9,color:#1a1a2e
+    classDef module fill:#1a1a2e,stroke:#4a90d9,color:#e8f4fd
+    classDef data fill:#f0f4ff,stroke:#8899cc,color:#1a1a2e
+    classDef external fill:#2d5016,stroke:#5a9e2f,color:#d4edda
+    classDef out fill:#fff3cd,stroke:#d4a017,color:#1a1a2e
+```
+
+---
+
 ## Project Structure
 
 ```
