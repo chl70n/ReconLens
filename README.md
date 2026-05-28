@@ -10,12 +10,12 @@ nmap -sV --open  →  lean JSON  →  llama3.2 (Ollama)  →  rich markdown repo
 
 ## Features
 
-- **Auto-scan mode** — point at a target IP/range, ReconLens runs nmap and analyzes automatically
-- **Manual mode** — feed any existing Nmap XML file
-- **100% local** — all inference on `localhost:11434` via Ollama, zero data leaves the machine
-- **Prioritized output** — Critical / High / Recommendations ranked by exploitability
-- **Safe XML parsing** — `defusedxml` blocks XXE, DTD injection, billion-laughs attacks
-- **Save reports** — dump analysis to markdown with `-o`
+- Auto-scan mode: point ReconLens at a target IP or range and it runs nmap, then analyzes automatically
+- Manual mode: feed any existing Nmap XML file.
+- 100% local: all inference runs on `localhost:11434` via Ollama, zero data leaves the machine
+- Prioritized output: Critical / High / Recommendations ranked by exploitability
+- Safe XML parsing: `defusedxml` blocks XXE, DTD injection, and billion-laughs attacks
+- Save reports to markdown with `-o`
 
 ---
 
